@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!-- 방향키 입력 함수 작성 필요 -->
+<html>
+    <head>
+        <title>2048</title>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+
+            function test(){
+                for(var i = 0; i < 4; i++){
+                    for(var j = 0; j < 4; j++){
+                        console.log(tb_num_data[i][j]);
+                    }
+                }
+            }
+
+            window.onkeyup = function(e){
+                console.log(e.keyCode);
+                insert_key(e.keyCode)
+            }
+
+            var tb_num_data = [[null,null,null,null], [null,null,null,null], [null,null,null,null], [null,null,null,null]];
+
+            function fn_start(){
+                for(var i = 0; i < 4; i++){
+                    for(var j = 0; j < 4; j++){
+                        tb_num_data[i][j] = null;
+                    }
+                }
+                var sc = randnum(2);
+                var sn = randnum(16);
+                tb_num_data[get_fnum(sn)][get_snum(sn)] = randnum(2) + 1;
+                
+                if(sc == 1){
+                    while(1){
+                        var sn_new = randnum(16);
+                        if(sn != sn_new){
+                            tb_num_data[get_fnum(sn_new)][get_snum(sn_new)] = randnum(2) + 1;
+                            break;
+                        }
+                    }
+                }
+                num_set();
+                
+            }
+
+            function num_set(){
+                for(var i = 0; i < 4; i++){
+                    for(var j = 0; j < 4; j++){
+                        document.getElementById("tb_" + i + j).innerText = tb_num_data[i][j];
+                    }
+                }
+            }
+
+            function insert_key(num){
+                switch(num){
+                    case 37:
+                        move_num(37);
+                        break;
+                }
+
+            }
+
+            function move_num(num){
+                for(var i = 0; i < 4; i++){
+                    for(var j = 1; j < 4; j++){
+                        var cnt = j;
+                        while(tb_num_data[i][cnt] == null){
+
+                        }
+                        tb_num_data[i][j];
+
+                    }
+                }
+                
+            }
+
+            function get_fnum(num){
+                var cnt = 0;
+                                 
+                if(num > 3){
+                    while(num > 3){
+                        num -= 4;
+                        cnt++;
+                    }
+                }
+                return cnt;
+
+            }
+
+            function get_snum(num){                                 
+                if(num > 3){
+                    while(num > 3){
+                        num -= 4;
+                    }
+                }
+                return num;
+
+            }
+            function randnum(num){
+                return Math.floor(Math.random() * num);
+            }
+        </script>
+        <style type="text/css">
+            *{
+                margin: 0px;
+                padding: 0px;
+            }
+            .block{
+                background: #666666;
+                width: 100px;
+                height: 100px;
+                color: blanchedalmond;
+                font-size: 35px;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                text-align: center;
+            }
+            .score{
+                text-align: right;
+            }
+            .blockbg{
+                background: linear-gradient(to right, #ff3232b0, #803bffb6);
+                background-attachment: fixed;
+            }
+            .g2048{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-50%);
+            }
+            .bt_start{
+                background: rgba(255,255,255,0.3);
+                border-width: 0px;
+                width: 70px;
+                height: 30px;
+            }
+        </style>
+    </head>
+    <body class="blockbg">
+        <div class="g2048">
+            <div>
+                <table>
+                    <td><font size=8>2048</font></td>
+                    <td class="score">score</td>
+                    <td><input class="bt_start" type="button" value="START" onclick="fn_start()"></td>
+                </table>
+            </div>
+            <div>
+                <table cellspacing=8>
+                    <tr>
+                        <td class="block" id="tb_00"></td>
+                        <td class="block" id="tb_01"></td>
+                        <td class="block" id="tb_02"></td>
+                        <td class="block" id="tb_03"></td>
+                    </tr>
+                    <tr>
+                        <td class="block" id="tb_10"></td>
+                        <td class="block" id="tb_11"></td>
+                        <td class="block" id="tb_12"></td>
+                        <td class="block" id="tb_13"></td>
+                    </tr>
+                    <tr>
+                        <td class="block" id="tb_20"></td>
+                        <td class="block" id="tb_21"></td>
+                        <td class="block" id="tb_22"></td>
+                        <td class="block" id="tb_23"></td>
+                    </tr>
+                    <tr>
+                        <td class="block" id="tb_30"></td>
+                        <td class="block" id="tb_31"></td>
+                        <td class="block" id="tb_32"></td>
+                        <td class="block" id="tb_33"></td>
+                    </tr>
+                </table>
+                <input type="button" onclick="test()" value="test">
+            </div>
+        </div>
+    </body>
+</html>
