@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--점수 표시 에러-->
+<!--점수 표시 에러 수정-->
 <html>
     <head>
         <title>2048</title>
@@ -109,8 +109,7 @@
             }
 
             function scoreupdate(num){
-                console.log(num);
-                if(num != NaN){
+                if(!isNaN(num)){
                     score += num;
                     document.getElementById("score").innerText = score;
                 }
