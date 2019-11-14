@@ -7,12 +7,14 @@
         <script type="text/javascript">
 
             function test(){
-                tb_num_data = [[null,null,null,null], [null,null,null,null], [null,null,null,null], [null,null,null,null]];
+                tb_num_data[2][2] = 2048;
+                tb_num_data[2][3] = 1024;
                 num_set();
             }
 
             window.onkeyup = function(e){
                 insert_key(e.keyCode)
+
             }
 
             var tb_num_data = [[null,null,null,null], [null,null,null,null], [null,null,null,null], [null,null,null,null]];
@@ -48,6 +50,63 @@
                         console.log('full');
                 }
                 
+            }
+
+            function colorcg(space, num){
+                var blockColor = document.querySelectorAll('td.block');
+
+                if(num < 4){
+                    num = 1;
+                }else if(num > 2048){
+                    num = 2048;
+                }
+
+                switch(num){
+                    case 1:
+                        blockColor[space].style.background='#666666';
+                        blockColor[space].style.color='blanchedalmond';
+                        break;
+                    case 4:
+                        blockColor[space].style.background='#555555';
+                        blockColor[space].style.color='blanchedalmond';
+                        break;
+                    case 8:
+                        blockColor[space].style.background='#444444';
+                        blockColor[space].style.color='blanchedalmond';
+                        break;
+                    case 16:
+                        blockColor[space].style.background='#333333';
+                        blockColor[space].style.color='blanchedalmond';
+                        break;
+                    case 32:
+                        blockColor[space].style.background='#333333';
+                        blockColor[space].style.color='orange';
+                        break;
+                    case 64:
+                        blockColor[space].style.background='#222222';
+                        blockColor[space].style.color='orange';
+                        break;
+                    case 128:
+                        blockColor[space].style.background='#ffef5d';
+                        blockColor[space].style.color='#333333';
+                        break;
+                    case 256:
+                        blockColor[space].style.background='#ffbb00';
+                        blockColor[space].style.color='#333333';
+                        break;
+                    case 512:
+                        blockColor[space].style.background='#ff7b00';
+                        blockColor[space].style.color='#333333';
+                        break;
+                    case 1024:
+                        blockColor[space].style.background='#ff685d';
+                        blockColor[space].style.color='#333333';
+                        break;
+                    case 2048:
+                        blockColor[space].style.background='#ff685d';
+                        blockColor[space].style.color='yellow';
+                        break;
+                }
             }
 
             function creatnum_check(){
@@ -104,6 +163,7 @@
                 for(var i = 0; i < 4; i++){
                     for(var j = 0; j < 4; j++){
                         document.getElementById("tb_" + i + j).innerText = tb_num_data[i][j];
+                        colorcg((i*4) + j, tb_num_data[i][j]);
                     }
                 }
             }
