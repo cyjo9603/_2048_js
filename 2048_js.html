@@ -1,17 +1,10 @@
 <!DOCTYPE html>
-<!--점수 표시 에러 수정-->
+<!--table -> div grid layout으로 변경-->
 <html>
     <head>
         <title>2048</title>
         <meta charset="utf-8">
         <script type="text/javascript">
-
-            function test(){
-                tb_num_data[2][2] = 2048;
-                tb_num_data[2][3] = 1024;
-                num_set();
-            }
-
             window.onkeyup = function(e){
                 insert_key(e.keyCode)
 
@@ -53,7 +46,7 @@
             }
 
             function colorcg(space, num){
-                var blockColor = document.querySelectorAll('td.block');
+                var blockColor = document.querySelectorAll('div.block');
 
                 if(num < 4){
                     num = 1;
@@ -400,6 +393,7 @@
                 font-size: 35px;
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 text-align: center;
+                line-height: 100px;
             }
             .score{
                 text-align: center;
@@ -428,6 +422,14 @@
                 font-size: 60px;
                 padding-right: 80px;
             }
+            .gamepage{
+                display: grid;
+                width: 500px;
+                height: 500px;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                align-items: center;
+                justify-items: center;
+            }
         </style>
     </head>
     <body class="blockbg">
@@ -439,35 +441,24 @@
                     <td><input class="bt_start" type="button" value="START" onclick="fn_start()"></td>
                 </table>
             </div>
-            <div>
-                <table cellspacing=8>
-                    <tr>
-                        <td class="block" id="tb_00"></td>
-                        <td class="block" id="tb_01"></td>
-                        <td class="block" id="tb_02"></td>
-                        <td class="block" id="tb_03"></td>
-                    </tr>
-                    <tr>
-                        <td class="block" id="tb_10"></td>
-                        <td class="block" id="tb_11"></td>
-                        <td class="block" id="tb_12"></td>
-                        <td class="block" id="tb_13"></td>
-                    </tr>
-                    <tr>
-                        <td class="block" id="tb_20"></td>
-                        <td class="block" id="tb_21"></td>
-                        <td class="block" id="tb_22"></td>
-                        <td class="block" id="tb_23"></td>
-                    </tr>
-                    <tr>
-                        <td class="block" id="tb_30"></td>
-                        <td class="block" id="tb_31"></td>
-                        <td class="block" id="tb_32"></td>
-                        <td class="block" id="tb_33"></td>
-                    </tr>
-                </table>
-                <input type="button" onclick="test()" value="test">
-            </div>
+            <div class="gamepage">
+                <div class="block" id="tb_00"></div>
+                <div class="block" id="tb_01"></div>
+                <div class="block" id="tb_02"></div>
+                <div class="block" id="tb_03"></div>
+                <div class="block" id="tb_10"></div>
+                <div class="block" id="tb_11"></div>
+                <div class="block" id="tb_12"></div>
+                <div class="block" id="tb_13"></div>
+                <div class="block" id="tb_20"></div>
+                <div class="block" id="tb_21"></div>
+                <div class="block" id="tb_22"></div>
+                <div class="block" id="tb_23"></div>
+                <div class="block" id="tb_30"></div>
+                <div class="block" id="tb_31"></div>
+                <div class="block" id="tb_32"></div>
+                <div class="block" id="tb_33"></div>              
+            </div>            
         </div>
     </body>
 </html>
