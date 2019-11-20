@@ -10,7 +10,7 @@
             var state = 0;
             var mode = 4;
 
-             function setGame(){
+            function setGame(){
                 var htmlText = '';
                     for(var i = 0; i < mode; i++){
                         tb_num_data[i] = new Object;
@@ -23,9 +23,8 @@
                     } 
                 document.getElementById("gameboard1").className = 'gameboard_' + mode;
                 document.getElementById("gameboard1").innerHTML = htmlText;
-             }
+            }
             
-
             window.onkeyup = function(e){
                 if(state == 1){
                     datacopy();
@@ -264,9 +263,12 @@
 
             }
             function mode_change(num){
-                var nowMode = document.getElementById('status_mode').innerText;
-                document.getElementById('status_mode').innerText = eval(nowMode + num);
-                mode = document.getElementById('status_mode').innerText;
+                var nowMode = eval(document.getElementById('status_mode').innerText + num);
+
+                if(nowMode > 3 && nowMode < 9){
+                    document.getElementById('status_mode').innerText = nowMode;
+                    mode = nowMode;
+                } 
             }
 
             function randnum(num){
@@ -353,6 +355,38 @@
                 border-radius: 10px;
                 padding: 5px;
             }
+            .gameboard_6{
+                display: grid;
+                width: 450px;
+                height: 450px;
+                grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+                align-items: center;
+                justify-items: center;
+                background: rgba(0,0,0,0.5);                
+                border-radius: 10px;
+                padding: 5px;
+            }.gameboard_7{
+                display: grid;
+                width: 450px;
+                height: 450px;
+                grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+                align-items: center;
+                justify-items: center;
+                background: rgba(0,0,0,0.5);                
+                border-radius: 10px;
+                padding: 5px;
+            }
+            .gameboard_8{
+                display: grid;
+                width: 450px;
+                height: 450px;
+                grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+                align-items: center;
+                justify-items: center;
+                background: rgba(0,0,0,0.5);                
+                border-radius: 10px;
+                padding: 5px;
+            }
             .block_4{
                 background: none;
                 width: 100px;
@@ -373,6 +407,39 @@
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 text-align: center;
                 line-height: 80px;
+                border-radius: 10px;
+            }
+            .block_6{
+                background: none;
+                width: 66.6px;
+                height: 66.6px;
+                color: blanchedalmond;
+                font-size: 28px;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                text-align: center;
+                line-height: 66.6px;
+                border-radius: 10px;
+            }
+            .block_7{
+                background: none;
+                width: 57.1px;
+                height: 57.1px;
+                color: blanchedalmond;
+                font-size: 28px;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                text-align: center;
+                line-height: 57.1px;
+                border-radius: 10px;
+            }
+            .block_8{
+                background: none;
+                width: 50px;
+                height: 50px;
+                color: blanchedalmond;
+                font-size: 28px;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                text-align: center;
+                line-height: 50px;
                 border-radius: 10px;
             }
         </style>
