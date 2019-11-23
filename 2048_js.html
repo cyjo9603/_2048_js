@@ -3,6 +3,9 @@
     <head>
         <title>2048</title>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css">
         <script type="text/javascript">
             var tb_num_data = new Object;
             var tb_num_data_old = new Object;
@@ -161,7 +164,7 @@
 
                 switch(num){
                     case null:
-                        colorSet(space, 'none', 'none');
+                        colorSet(space, '#D4CDC5', 'none');
                         break;
                     case 2:
                         colorSet(space, '#ECE3DA', '#685F58');
@@ -275,189 +278,25 @@
                 return Math.floor(Math.random() * num);
             }
         </script>
-
-        <style type="text/css">
-            *{
-                margin: 0px;
-                padding: 0px;
-            }
-            .main{
-                background: linear-gradient(to right, #ff3232b0, #803bffb6);
-                background-attachment: fixed;
-            }
-            section{
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translateX(-50%) translateY(-50%);
-            }
-            .statusBar{
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr 1fr;
-                width: 460px;
-                align-items: center;
-                justify-items: center;
-            }
-            .titleName{
-                font-size: 60px;
-                padding-right: 80px;
-            }
-            .modeSelector{
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr;
-                line-height: 10px;
-            }
-            .mode_down{
-                width: 30px;
-                height: 30px;
-                margin-right: 10px;
-                font-size: 20px;
-            }
-            .mode_up{
-                width: 30px;
-                height: 30px;
-                margin-left: 10px;
-                font-size: 20px;
-                margin-left: 20px;
-                }
-            .score{
-                text-align: center;
-                font-size: 20px;
-                width: 80px;
-                height: 50px;
-                text-align: center;
-            }
-            .button_start{
-                background: rgba(255,255,255,0.1);
-                border-width: 0px;
-                width: 70px;
-                height: 30px;
-            }
-            .gameboard_4{
-                display: grid;
-                width: 450px;
-                height: 450px;
-                grid-template-columns: 1fr 1fr 1fr 1fr;
-                align-items: center;
-                justify-items: center;
-                background: rgba(0,0,0,0.5);                
-                border-radius: 10px;
-                padding: 5px;
-            }
-            .gameboard_5{
-                display: grid;
-                width: 450px;
-                height: 450px;
-                grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-                align-items: center;
-                justify-items: center;
-                background: rgba(0,0,0,0.5);                
-                border-radius: 10px;
-                padding: 5px;
-            }
-            .gameboard_6{
-                display: grid;
-                width: 450px;
-                height: 450px;
-                grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-                align-items: center;
-                justify-items: center;
-                background: rgba(0,0,0,0.5);                
-                border-radius: 10px;
-                padding: 5px;
-            }.gameboard_7{
-                display: grid;
-                width: 450px;
-                height: 450px;
-                grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-                align-items: center;
-                justify-items: center;
-                background: rgba(0,0,0,0.5);                
-                border-radius: 10px;
-                padding: 5px;
-            }
-            .gameboard_8{
-                display: grid;
-                width: 450px;
-                height: 450px;
-                grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-                align-items: center;
-                justify-items: center;
-                background: rgba(0,0,0,0.5);                
-                border-radius: 10px;
-                padding: 5px;
-            }
-            .block_4{
-                background: none;
-                width: 100px;
-                height: 100px;
-                color: blanchedalmond;
-                font-size: 35px;
-                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-                text-align: center;
-                line-height: 100px;
-                border-radius: 10px;
-            }
-            .block_5{
-                background: none;
-                width: 80px;
-                height: 80px;
-                color: blanchedalmond;
-                font-size: 28px;
-                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-                text-align: center;
-                line-height: 80px;
-                border-radius: 10px;
-            }
-            .block_6{
-                background: none;
-                width: 66.6px;
-                height: 66.6px;
-                color: blanchedalmond;
-                font-size: 28px;
-                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-                text-align: center;
-                line-height: 66.6px;
-                border-radius: 10px;
-            }
-            .block_7{
-                background: none;
-                width: 57.1px;
-                height: 57.1px;
-                color: blanchedalmond;
-                font-size: 28px;
-                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-                text-align: center;
-                line-height: 57.1px;
-                border-radius: 10px;
-            }
-            .block_8{
-                background: none;
-                width: 50px;
-                height: 50px;
-                color: blanchedalmond;
-                font-size: 28px;
-                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-                text-align: center;
-                line-height: 50px;
-                border-radius: 10px;
-            }
-        </style>
     </head>
-    <body class="main">
-        <section>
+    <body>
+        <div class="main">
             <div class="statusBar">
-                <div class="titleName" id="test">2048</div>
-                <div class="modeSelector" id="select_mode">
-                    <div class="mode_down" onclick="mode_change('-1');">◀</div>
-                    <span id="status_mode">4</span>
-                    <div class="mode_up" onclick="mode_change('+1');">▶</div>
+                <div class="statusBar_1f">
+                    <div class="titleName" id="test">2048</div>
+                    <div class="score">점수<br><br><span class="scoreNum" id="score">&nbsp;</span></div>
+                    <div class="score">최고 점수<br><br><span id="bestScore">&nbsp;</span></div>
                 </div>
-                <div class="score">score<br><span id="score">&nbsp;</span></div>
-                <div><input class="button_start" type="button" value="START" onclick="button_start()"></div>
-            </div>           
-            <div class="gameboard_4" id="gameboard1">
-            </div>            
-        </section>
+                <div class="statusBar_2f">
+                    <div><input class="_button" type="button" value="START" onclick="button_start()"></div>
+                    <div class="modeSelector" id="select_mode">
+                        <div class="button_div"><input class="_button" type="button" value="▶" onclick="mode_change('+1');"></div>
+                        <div class="button_div"><span class="modLevel" id="status_mode">4</span></div>
+                        <div class="button_div"><input class="_button" type="button" value="◀" onclick="mode_change('-1');"></div>
+                    </div>
+                </div>  
+            </div>         
+            <div class="gameboard_4" id="gameboard1"></div>            
+        </div>
     </body>
 </html>

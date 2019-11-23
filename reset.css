@@ -1,0 +1,7 @@
+body, section, div, span, input{
+    margin: 0px;
+    padding: 0px;
+    font-family: "나눔 고딕", "Nanum Gothic", sans-serif;
+}
+
+body{background-color: #F8F8EE;}

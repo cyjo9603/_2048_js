@@ -1,0 +1,186 @@
+.main{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+.statusBar{
+    width: 460px;
+}
+.statusBar .statusBar_1f{
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+}
+.statusBar .statusBar_1f .titleName{
+    font-size: 60px;
+    padding-right: 80px;
+    color: #72564A;
+    float: left;   
+    font-weight: 700;     
+}
+.statusBar .statusBar_1f .score{
+    text-align: center;
+    font-size: 10px;
+    color: #F8F8EE;
+    width: 80px;
+    height: 50px;
+    text-align: center;
+    background: #8C7B69;
+    border-radius: 10px;
+    float: right;
+    margin: 10px 0px 10px 10px;
+}
+.statusBar .statusBar_1f .score .scoreNum{
+    font-size: 20px;
+}
+/* //statusBar 1f */
+
+.statusBar .statusBar_2f{
+    display: inline-block;
+    margin-bottom: 10px;
+    width: 100%;
+}
+.statusBar .statusBar_2f ._button{
+    background: #8C7B69;
+    border-width: 0px;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 10px;
+    color: #F8F8EE;
+    float: left;
+}
+.statusBar .statusBar_2f .modeSelector{
+    overflow: hidden;
+    height: 35px;
+}
+.statusBar .statusBar_2f .modeSelector .button_div{
+    width: 30px;
+    height: 30px;
+    margin: 0px 0px;
+    font-size: 20px;
+    margin: 0px 5px;
+    float: right;
+}
+
+.statusBar .statusBar_2f .modeSelector .modLevel{
+    display: block;
+    background: #8C7B69;
+    border-width: 0px;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 10px;
+    color: #F8F8EE;
+    text-align: center;
+}
+/* //statusBar 2f */
+
+.gameboard_4{
+    display: grid;
+    width: 450px;
+    height: 450px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    background: #B7ADA1;                
+    border-radius: 10px;
+    padding: 5px;
+}
+.gameboard_5{
+    display: grid;
+    width: 450px;
+    height: 450px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    background: #B7ADA1;                
+    border-radius: 10px;
+    padding: 5px;
+}
+.gameboard_6{
+    display: grid;
+    width: 450px;
+    height: 450px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    background: #B7ADA1;                
+    border-radius: 10px;
+    padding: 5px;
+}.gameboard_7{
+    display: grid;
+    width: 450px;
+    height: 450px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    background: #B7ADA1;                
+    border-radius: 10px;
+    padding: 5px;
+}
+.gameboard_8{
+    display: grid;
+    width: 450px;
+    height: 450px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    background: #B7ADA1;                
+    border-radius: 10px;
+    padding: 5px;
+}
+/* //gameboard */
+
+.block_4{
+    background: none;
+    width: 100px;
+    height: 100px;
+    color: blanchedalmond;
+    font-size: 35px;
+    text-align: center;
+    line-height: 100px;
+    border-radius: 10px;
+}
+.block_5{
+    background: none;
+    width: 80px;
+    height: 80px;
+    color: blanchedalmond;
+    font-size: 28px;
+    text-align: center;
+    line-height: 80px;
+    border-radius: 10px;
+}
+.block_6{
+    background: none;
+    width: 66.6px;
+    height: 66.6px;
+    color: blanchedalmond;
+    font-size: 28px;
+    text-align: center;
+    line-height: 66.6px;
+    border-radius: 10px;
+}
+.block_7{
+    background: none;
+    width: 57.1px;
+    height: 57.1px;
+    color: blanchedalmond;
+    font-size: 28px;
+    text-align: center;
+    line-height: 57.1px;
+    border-radius: 10px;
+}
+.block_8{
+    background: none;
+    width: 50px;
+    height: 50px;
+    color: blanchedalmond;
+    font-size: 28px;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 10px;
+}
+/* //block */
