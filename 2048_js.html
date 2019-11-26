@@ -29,7 +29,7 @@
             }
             
             window.onkeyup = function(e){
-                if(state == 1){
+                if(state === 1){
                     datacopy();
                     switch(e.keyCode){
                         case 37:
@@ -40,11 +40,11 @@
                                     for(var p = 0; p < j; p++){
                                         space_cnt += tb_num_data[i][p] == null ? 1 : 0;
                                     }
-                                    if(space_cnt != 0){
+                                    if(space_cnt !== 0){
                                         tb_num_data[i][j-space_cnt] = tb_num_data[i][j];
                                         tb_num_data[i][j] = null;
                                     }
-                                    if(tb_num_data[i][j-space_cnt-1] == tb_num_data[i][j-space_cnt]){
+                                    if(tb_num_data[i][j-space_cnt-1] === tb_num_data[i][j-space_cnt]){
                                         tb_num_data[i][j-space_cnt-1] *= 2;
                                         tb_num_data[i][j-space_cnt] = null;
                                         scoreupdate(tb_num_data[i][j-space_cnt-1]);
@@ -60,11 +60,11 @@
                                     for(var p = 0; p < i; p++){
                                         space_cnt += tb_num_data[p][j] == null ? 1 : 0;
                                     }
-                                    if(space_cnt != 0){
+                                    if(space_cnt !== 0){
                                         tb_num_data[i-space_cnt][j] = tb_num_data[i][j];
                                         tb_num_data[i][j] = null;
                                     }
-                                    if(i-space_cnt-1 > -1 && tb_num_data[i-space_cnt][j] == tb_num_data[i-space_cnt-1][j]){
+                                    if(i-space_cnt-1 > -1 && tb_num_data[i-space_cnt][j] === tb_num_data[i-space_cnt-1][j]){
                                         tb_num_data[i-space_cnt-1][j] *= 2;
                                         tb_num_data[i-space_cnt][j] = null;    
                                         scoreupdate(tb_num_data[i-space_cnt-1][j]);                    
@@ -81,11 +81,11 @@
                                     for(var p = mode-1; p > j; p--){
                                         space_cnt += tb_num_data[i][p] == null ? 1 : 0;
                                     }
-                                    if(space_cnt != 0){
+                                    if(space_cnt !== 0){
                                         tb_num_data[i][j+space_cnt] = tb_num_data[i][j];
                                         tb_num_data[i][j] = null;
                                     }
-                                    if(tb_num_data[i][j+space_cnt] == tb_num_data[i][j+space_cnt+1]){
+                                    if(tb_num_data[i][j+space_cnt] === tb_num_data[i][j+space_cnt+1]){
                                         tb_num_data[i][j+space_cnt+1] *= 2;
                                         tb_num_data[i][j+space_cnt] = null;  
                                         scoreupdate(tb_num_data[i][j+space_cnt+1]);       
@@ -101,11 +101,11 @@
                                     for(var p = mode-1; p > i; p--){
                                         space_cnt += tb_num_data[p][j] == null ? 1 : 0;
                                     }
-                                    if(space_cnt != 0){
+                                    if(space_cnt !== 0){
                                         tb_num_data[i+space_cnt][j] = tb_num_data[i][j];
                                         tb_num_data[i][j] = null;
                                     }
-                                    if(i+space_cnt+1 < 4 && tb_num_data[i+space_cnt][j] == tb_num_data[i+space_cnt+1][j]){
+                                    if(i+space_cnt+1 < 4 && tb_num_data[i+space_cnt][j] === tb_num_data[i+space_cnt+1][j]){
                                         tb_num_data[i+space_cnt+1][j] *= 2;
                                         tb_num_data[i+space_cnt][j] = null;  
                                         scoreupdate(tb_num_data[i+space_cnt+1][j]);       
@@ -115,8 +115,12 @@
                             break;
                     }                          
                                 
-                    if(datacheck() != mode * mode){
+                    if(datacheck() !== mode * mode)
                         creatnum();
+                    else if(fail_check() === 0){
+                        state = 0;
+                        if(document.getElementById('bestScore').innerText == " " || document.getElementById('bestScore').innerText < score)
+                            document.getElementById('bestScore').innerText = score;
                     }
                     num_set();
                 }
@@ -136,19 +140,41 @@
                 num_set();
             }
 
+            function button_undo(){
+                if(state === 1){
+                    for(var i = 0; i < mode; i++){
+                        for(var j = 0; j < mode; j++){
+                            document.getElementById("tb_" + i + j).innerText = tb_num_data_old[i][j];
+                            colorcg((i*mode) + j, tb_num_data_old[i][j]);
+                        }
+                    }
+                }
+            }
+
+            function fail_check(){
+                if(datacheck() === mode * mode && space_check() === 2){
+                    var cnt = 0;
+                    for(var i = 0; i < mode - 1; i++){
+                        for(var j = 0; j < mode - 1; j++){
+                            if(tb_num_data[i][j] !== null && (tb_num_data[i][j] === tb_num_data[i][j+1] || tb_num_data[i][j] === tb_num_data[i+1][j]))
+                                cnt++;
+                        }
+                    }
+                    return cnt;
+                    console.log(cnt);
+                }
+            }
+
             function creatnum(){
-                if(space_check() < 2){
+                if(space_check() === 1){
                     while(1){
                         var num = randnum(mode * mode);
-                        if(tb_num_data[get_num(num)[0]][get_num(num)[1]] == null){
+                        if(tb_num_data[get_num(num)[0]][get_num(num)[1]] === null){
                             tb_num_data[get_num(num)[0]][get_num(num)[1]] = randnum(10) < 2 ? 4 : 2;
                             break;
                         }
                     }
-                }   
-                else
-                    state = 0;
-                               
+                }                               
             }
 
             function colorSet(space, bg, num){
@@ -215,7 +241,7 @@
                 var check = 0;
                 for(var i = 0; i < mode; i++){
                     for(var j = 0; j < mode; j++){
-                        if(tb_num_data_old[i][j] == tb_num_data[i][j])
+                        if(tb_num_data_old[i][j] === tb_num_data[i][j])
                             check += 1;
                     }
                 }
@@ -226,7 +252,7 @@
                 var cnt = 0;
                 for(var i = 0; i < mode; i++){
                     for(var j = 0; j < mode; j++){
-                        if(tb_num_data[i][j] != null)
+                        if(tb_num_data[i][j] !== null)
                             cnt++;
                     }
                 }
@@ -285,10 +311,11 @@
                 <div class="statusBar_1f">
                     <div class="titleName" id="test">2048</div>
                     <div class="score">점수<br><br><span class="scoreNum" id="score">&nbsp;</span></div>
-                    <div class="score">최고 점수<br><br><span id="bestScore">&nbsp;</span></div>
+                    <div class="score">최고 점수<br><br><span class="scoreNum" id="bestScore">&nbsp;</span></div>
                 </div>
                 <div class="statusBar_2f">
                     <div><input class="_button" type="button" value="START" onclick="button_start()"></div>
+                    <div><input class="_button" type="button" value="UNDO" onclick="button_undo()"></div>
                     <div class="modeSelector" id="select_mode">
                         <div class="button_div"><input class="_button" type="button" value="▶" onclick="mode_change('+1');"></div>
                         <div class="button_div"><span class="modLevel" id="status_mode">4</span></div>

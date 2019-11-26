@@ -5,3 +5,5 @@ body, section, div, span, input{
 }
 
 body{background-color: #F8F8EE;}
+
+input{border-width: 0px; outline: 0px;}
