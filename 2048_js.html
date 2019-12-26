@@ -1,329 +1,315 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>2048</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="reset.css">
-        <link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css">
-        <script type="text/javascript">
-            var tb_num_data = new Object;
-            var tb_num_data_old = new Object;
-            var score = 0;
-            var state = 0;
-            var mode = 4;
+  <head>
+    <title>_2048</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css" />
+    <script type="text/javascript">
+      var tb_num_data = new Object();
+      var tb_num_data_old = new Object();
+      var score = 0;
+      var state = 0;
+      var mode = 4;
 
-            function setGame(){
-                var htmlText = '';
-                    for(var i = 0; i < mode; i++){
-                        tb_num_data[i] = new Object;
-                        tb_num_data_old[i] = new Object;
-                        for(var j = 0; j < mode; j++){
-                           htmlText += '<div class="block_' + mode + '" id="tb_' + i + j + '"></div>' + "\n";
-                           tb_num_data[i][j] = null;
-                           tb_num_data_old[i][j] = null;
-                        }
-                    } 
-                document.getElementById("gameboard1").className = 'gameboard_' + mode;
-                document.getElementById("gameboard1").innerHTML = htmlText;
-            }
-            
-            window.onkeyup = function(e){
-                if(state === 1){
-                    datacopy();
-                    switch(e.keyCode){
-                        case 37:
-                            
-                            for(var i = 0; i < mode; i++){
-                                for(var j = 1; j < mode; j++){
-                                    var space_cnt = 0;
-                                    for(var p = 0; p < j; p++){
-                                        space_cnt += tb_num_data[i][p] == null ? 1 : 0;
-                                    }
-                                    if(space_cnt !== 0){
-                                        tb_num_data[i][j-space_cnt] = tb_num_data[i][j];
-                                        tb_num_data[i][j] = null;
-                                    }
-                                    if(tb_num_data[i][j-space_cnt-1] === tb_num_data[i][j-space_cnt]){
-                                        tb_num_data[i][j-space_cnt-1] *= 2;
-                                        tb_num_data[i][j-space_cnt] = null;
-                                        scoreupdate(tb_num_data[i][j-space_cnt-1]);
-                                    }
-                                }     
-                            }          
-                            break;
-                        case 38:
-                            for(var j = 0; j < mode; j++)
-                            {
-                                for(var i = 1; i < mode; i++){
-                                    var space_cnt = 0;
-                                    for(var p = 0; p < i; p++){
-                                        space_cnt += tb_num_data[p][j] == null ? 1 : 0;
-                                    }
-                                    if(space_cnt !== 0){
-                                        tb_num_data[i-space_cnt][j] = tb_num_data[i][j];
-                                        tb_num_data[i][j] = null;
-                                    }
-                                    if(i-space_cnt-1 > -1 && tb_num_data[i-space_cnt][j] === tb_num_data[i-space_cnt-1][j]){
-                                        tb_num_data[i-space_cnt-1][j] *= 2;
-                                        tb_num_data[i-space_cnt][j] = null;    
-                                        scoreupdate(tb_num_data[i-space_cnt-1][j]);                    
-                                    }
+      function setGame() {
+        var htmlText = '';
+        for (var i = 0; i < mode; i++) {
+          tb_num_data[i] = new Object();
+          tb_num_data_old[i] = new Object();
+          for (var j = 0; j < mode; j++) {
+            htmlText += '<div class="block_' + mode + '" id="tb_' + i + j + '"></div>' + '\n';
+            tb_num_data[i][j] = null;
+            tb_num_data_old[i][j] = null;
+          }
+        }
+        document.getElementById('gameboard1').className = 'gameboard_' + mode;
+        document.getElementById('gameboard1').innerHTML = htmlText;
+      }
 
-                                }                        
-                            }          
-                            break;
-                        case 39:
-                        for(var i = 0; i < mode; i++)
-                        {
-                            for(var j = mode-2; j > -1; j--){
-                                    var space_cnt = 0;
-                                    for(var p = mode-1; p > j; p--){
-                                        space_cnt += tb_num_data[i][p] == null ? 1 : 0;
-                                    }
-                                    if(space_cnt !== 0){
-                                        tb_num_data[i][j+space_cnt] = tb_num_data[i][j];
-                                        tb_num_data[i][j] = null;
-                                    }
-                                    if(tb_num_data[i][j+space_cnt] === tb_num_data[i][j+space_cnt+1]){
-                                        tb_num_data[i][j+space_cnt+1] *= 2;
-                                        tb_num_data[i][j+space_cnt] = null;  
-                                        scoreupdate(tb_num_data[i][j+space_cnt+1]);       
-                                    }                    
-                                }                        
-                            }          
-                            break;
-                        case 40:
-                            for(var j = 0; j < mode; j++)
-                            {
-                                for(var i = mode-2; i > -1; i--){
-                                    var space_cnt = 0;
-                                    for(var p = mode-1; p > i; p--){
-                                        space_cnt += tb_num_data[p][j] == null ? 1 : 0;
-                                    }
-                                    if(space_cnt !== 0){
-                                        tb_num_data[i+space_cnt][j] = tb_num_data[i][j];
-                                        tb_num_data[i][j] = null;
-                                    }
-                                    if(i+space_cnt+1 < 4 && tb_num_data[i+space_cnt][j] === tb_num_data[i+space_cnt+1][j]){
-                                        tb_num_data[i+space_cnt+1][j] *= 2;
-                                        tb_num_data[i+space_cnt][j] = null;  
-                                        scoreupdate(tb_num_data[i+space_cnt+1][j]);       
-                                    }
-                                }                        
-                            }          
-                            break;
-                    }                          
-                                
-                    if(datacheck() !== mode * mode)
-                        creatnum();
-                    else if(fail_check() === 0){
-                        state = 0;
-                        if(document.getElementById('bestScore').innerText == " " || document.getElementById('bestScore').innerText < score)
-                            document.getElementById('bestScore').innerText = score;
-                    }
-                    num_set();
+      window.onkeyup = function(e) {
+        if (state === 1) {
+          datacopy();
+          switch (e.keyCode) {
+            case 37:
+              for (var i = 0; i < mode; i++) {
+                for (var j = 1; j < mode; j++) {
+                  var space_cnt = 0;
+                  for (var p = 0; p < j; p++) {
+                    space_cnt += tb_num_data[i][p] == null ? 1 : 0;
+                  }
+                  if (space_cnt !== 0) {
+                    tb_num_data[i][j - space_cnt] = tb_num_data[i][j];
+                    tb_num_data[i][j] = null;
+                  }
+                  if (tb_num_data[i][j - space_cnt - 1] === tb_num_data[i][j - space_cnt]) {
+                    tb_num_data[i][j - space_cnt - 1] *= 2;
+                    tb_num_data[i][j - space_cnt] = null;
+                    scoreupdate(tb_num_data[i][j - space_cnt - 1]);
+                  }
                 }
-            }
-
-            function button_start(){
-                setGame();
-                for(var i = 0; i < mode; i++){
-                    for(var j = 0; j < mode; j++){
-                        tb_num_data[i][j] = null;
-                    }
+              }
+              break;
+            case 38:
+              for (var j = 0; j < mode; j++) {
+                for (var i = 1; i < mode; i++) {
+                  var space_cnt = 0;
+                  for (var p = 0; p < i; p++) {
+                    space_cnt += tb_num_data[p][j] == null ? 1 : 0;
+                  }
+                  if (space_cnt !== 0) {
+                    tb_num_data[i - space_cnt][j] = tb_num_data[i][j];
+                    tb_num_data[i][j] = null;
+                  }
+                  if (i - space_cnt - 1 > -1 && tb_num_data[i - space_cnt][j] === tb_num_data[i - space_cnt - 1][j]) {
+                    tb_num_data[i - space_cnt - 1][j] *= 2;
+                    tb_num_data[i - space_cnt][j] = null;
+                    scoreupdate(tb_num_data[i - space_cnt - 1][j]);
+                  }
                 }
-                score = 0;
-                state = 1;
-                document.getElementById("score").innerText = score;
-                creatnum();                
-                num_set();
-            }
-
-            function button_undo(){
-                if(state === 1){
-                    for(var i = 0; i < mode; i++){
-                        for(var j = 0; j < mode; j++){
-                            document.getElementById("tb_" + i + j).innerText = tb_num_data_old[i][j];
-                            colorcg((i*mode) + j, tb_num_data_old[i][j]);
-                        }
-                    }
+              }
+              break;
+            case 39:
+              for (var i = 0; i < mode; i++) {
+                for (var j = mode - 2; j > -1; j--) {
+                  var space_cnt = 0;
+                  for (var p = mode - 1; p > j; p--) {
+                    space_cnt += tb_num_data[i][p] == null ? 1 : 0;
+                  }
+                  if (space_cnt !== 0) {
+                    tb_num_data[i][j + space_cnt] = tb_num_data[i][j];
+                    tb_num_data[i][j] = null;
+                  }
+                  if (tb_num_data[i][j + space_cnt] === tb_num_data[i][j + space_cnt + 1]) {
+                    tb_num_data[i][j + space_cnt + 1] *= 2;
+                    tb_num_data[i][j + space_cnt] = null;
+                    scoreupdate(tb_num_data[i][j + space_cnt + 1]);
+                  }
                 }
-            }
-
-            function fail_check(){
-                if(datacheck() === mode * mode && space_check() === 2){
-                    var cnt = 0;
-                    for(var i = 0; i < mode - 1; i++){
-                        for(var j = 0; j < mode - 1; j++){
-                            if(tb_num_data[i][j] !== null && (tb_num_data[i][j] === tb_num_data[i][j+1] || tb_num_data[i][j] === tb_num_data[i+1][j]))
-                                cnt++;
-                        }
-                    }
-                    return cnt;
-                    console.log(cnt);
+              }
+              break;
+            case 40:
+              for (var j = 0; j < mode; j++) {
+                for (var i = mode - 2; i > -1; i--) {
+                  var space_cnt = 0;
+                  for (var p = mode - 1; p > i; p--) {
+                    space_cnt += tb_num_data[p][j] == null ? 1 : 0;
+                  }
+                  if (space_cnt !== 0) {
+                    tb_num_data[i + space_cnt][j] = tb_num_data[i][j];
+                    tb_num_data[i][j] = null;
+                  }
+                  if (i + space_cnt + 1 < 4 && tb_num_data[i + space_cnt][j] === tb_num_data[i + space_cnt + 1][j]) {
+                    tb_num_data[i + space_cnt + 1][j] *= 2;
+                    tb_num_data[i + space_cnt][j] = null;
+                    scoreupdate(tb_num_data[i + space_cnt + 1][j]);
+                  }
                 }
+              }
+              break;
+          }
+
+          if (datacheck() !== mode * mode) creatnum();
+          else if (fail_check() === 0) {
+            state = 0;
+            if (document.getElementById('bestScore').innerText == ' ' || document.getElementById('bestScore').innerText < score) document.getElementById('bestScore').innerText = score;
+          }
+          num_set();
+        }
+      };
+
+      function button_start() {
+        setGame();
+        for (var i = 0; i < mode; i++) {
+          for (var j = 0; j < mode; j++) {
+            tb_num_data[i][j] = null;
+          }
+        }
+        score = 0;
+        state = 1;
+        document.getElementById('score').innerText = score;
+        creatnum();
+        num_set();
+      }
+
+      function button_undo() {
+        if (state === 1) {
+          for (var i = 0; i < mode; i++) {
+            for (var j = 0; j < mode; j++) {
+              document.getElementById('tb_' + i + j).innerText = tb_num_data_old[i][j];
+              colorcg(i * mode + j, tb_num_data_old[i][j]);
             }
+          }
+        }
+      }
 
-            function creatnum(){
-                if(space_check() === 1){
-                    while(1){
-                        var num = randnum(mode * mode);
-                        if(tb_num_data[get_num(num)[0]][get_num(num)[1]] === null){
-                            tb_num_data[get_num(num)[0]][get_num(num)[1]] = randnum(10) < 2 ? 4 : 2;
-                            break;
-                        }
-                    }
-                }                               
+      function fail_check() {
+        if (datacheck() === mode * mode && space_check() === 2) {
+          var cnt = 0;
+          for (var i = 0; i < mode - 1; i++) {
+            for (var j = 0; j < mode - 1; j++) {
+              if (tb_num_data[i][j] !== null && (tb_num_data[i][j] === tb_num_data[i][j + 1] || tb_num_data[i][j] === tb_num_data[i + 1][j])) cnt++;
             }
+          }
+          return cnt;
+          console.log(cnt);
+        }
+      }
 
-            function colorSet(space, bg, num){
-                var blockColor = document.querySelectorAll('div.block_' + mode);
-                blockColor[space].style.background=bg;
-                blockColor[space].style.color=num;
+      function creatnum() {
+        if (space_check() === 1) {
+          while (1) {
+            var num = randnum(mode * mode);
+            if (tb_num_data[get_num(num)[0]][get_num(num)[1]] === null) {
+              tb_num_data[get_num(num)[0]][get_num(num)[1]] = randnum(10) < 2 ? 4 : 2;
+              break;
             }
+          }
+        }
+      }
 
-            function colorcg(space, num){
-                
-                if(num > 2048)
-                    num = 2048;
+      function colorSet(space, bg, num) {
+        var blockColor = document.querySelectorAll('div.block_' + mode);
+        blockColor[space].style.background = bg;
+        blockColor[space].style.color = num;
+      }
 
-                switch(num){
-                    case null:
-                        colorSet(space, '#D4CDC5', 'none');
-                        break;
-                    case 2:
-                        colorSet(space, '#ECE3DA', '#685F58');
-                        break;
-                    case 4:
-                        colorSet(space, '#EADFC9', '#685F58');
-                        break;
-                    case 8:
-                        colorSet(space, '#E7B383', '#FFF5DE');
-                        break;
-                    case 16:
-                        colorSet(space, '#E7996B', '#FFF5DE');
-                        break;
-                    case 32:
-                        colorSet(space, '#E58366', '#FFF5DE');
-                        break;
-                    case 64:
-                        colorSet(space, '#E46747', '#FFF5DE');
-                        break;
-                    case 128:
-                        colorSet(space, '#E9D07E', '#FFF5DE');
-                        break;
-                    case 256:
-                        colorSet(space, '#E7C07E', '#FFF5DE');
-                        break;
-                    case 512:
-                        colorSet(space, '#E7CA66', '#FFF5DE');
-                        break;
-                    case 1024:
-                        colorSet(space, '#ff685d', '#333333');
-                        break;
-                    case 2048:
-                        colorSet(space, '#ff685d', 'red');
-                        break;
-                }
-            }
+      function colorcg(space, num) {
+        if (num > 2048) num = 2048;
 
-            function datacopy(){
-                for(var i = 0; i < mode; i++){
-                    for(var j = 0; j < mode; j++){
-                        tb_num_data_old[i][j] = tb_num_data[i][j];
-                    }
-                }
+        switch (num) {
+          case null:
+            colorSet(space, '#D4CDC5', 'none');
+            break;
+          case 2:
+            colorSet(space, '#ECE3DA', '#685F58');
+            break;
+          case 4:
+            colorSet(space, '#EADFC9', '#685F58');
+            break;
+          case 8:
+            colorSet(space, '#E7B383', '#FFF5DE');
+            break;
+          case 16:
+            colorSet(space, '#E7996B', '#FFF5DE');
+            break;
+          case 32:
+            colorSet(space, '#E58366', '#FFF5DE');
+            break;
+          case 64:
+            colorSet(space, '#E46747', '#FFF5DE');
+            break;
+          case 128:
+            colorSet(space, '#E9D07E', '#FFF5DE');
+            break;
+          case 256:
+            colorSet(space, '#E7C07E', '#FFF5DE');
+            break;
+          case 512:
+            colorSet(space, '#E7CA66', '#FFF5DE');
+            break;
+          case 1024:
+            colorSet(space, '#ff685d', '#333333');
+            break;
+          case 2048:
+            colorSet(space, '#ff685d', 'red');
+            break;
+        }
+      }
 
-            }
+      function datacopy() {
+        for (var i = 0; i < mode; i++) {
+          for (var j = 0; j < mode; j++) {
+            tb_num_data_old[i][j] = tb_num_data[i][j];
+          }
+        }
+      }
 
-            function datacheck(){
-                var check = 0;
-                for(var i = 0; i < mode; i++){
-                    for(var j = 0; j < mode; j++){
-                        if(tb_num_data_old[i][j] === tb_num_data[i][j])
-                            check += 1;
-                    }
-                }
-                return check;
-            }
+      function datacheck() {
+        var check = 0;
+        for (var i = 0; i < mode; i++) {
+          for (var j = 0; j < mode; j++) {
+            if (tb_num_data_old[i][j] === tb_num_data[i][j]) check += 1;
+          }
+        }
+        return check;
+      }
 
-            function space_check(){
-                var cnt = 0;
-                for(var i = 0; i < mode; i++){
-                    for(var j = 0; j < mode; j++){
-                        if(tb_num_data[i][j] !== null)
-                            cnt++;
-                    }
-                }
+      function space_check() {
+        var cnt = 0;
+        for (var i = 0; i < mode; i++) {
+          for (var j = 0; j < mode; j++) {
+            if (tb_num_data[i][j] !== null) cnt++;
+          }
+        }
 
-                cnt = cnt < (mode * mode) ? 1 : 2;
+        cnt = cnt < mode * mode ? 1 : 2;
 
-                return cnt;
-            }
+        return cnt;
+      }
 
-            function num_set(){
-                for(var i = 0; i < mode; i++){
-                    for(var j = 0; j < mode; j++){
-                        document.getElementById("tb_" + i + j).innerText = tb_num_data[i][j];
-                        colorcg((i*mode) + j, tb_num_data[i][j]);
-                    }
-                }
-            }
+      function num_set() {
+        for (var i = 0; i < mode; i++) {
+          for (var j = 0; j < mode; j++) {
+            document.getElementById('tb_' + i + j).innerText = tb_num_data[i][j];
+            colorcg(i * mode + j, tb_num_data[i][j]);
+          }
+        }
+      }
 
-            function scoreupdate(num){
-                if(!isNaN(num)){
-                    score += num;
-                    document.getElementById("score").innerText = score;
-                }
-            }
+      function scoreupdate(num) {
+        if (!isNaN(num)) {
+          score += num;
+          document.getElementById('score').innerText = score;
+        }
+      }
 
-            function get_num(num){
-                var rtnum = [0, num];
-                                 
-                if(rtnum[1] > mode - 1){
-                    while(rtnum[1] > mode -1){
-                        rtnum[1] -= mode;
-                        rtnum[0]++;
-                    }
-                }
+      function get_num(num) {
+        var rtnum = [0, num];
 
-                return rtnum;
+        if (rtnum[1] > mode - 1) {
+          while (rtnum[1] > mode - 1) {
+            rtnum[1] -= mode;
+            rtnum[0]++;
+          }
+        }
 
-            }
-            function mode_change(num){
-                var nowMode = eval(document.getElementById('status_mode').innerText + num);
+        return rtnum;
+      }
+      function mode_change(num) {
+        var nowMode = eval(document.getElementById('status_mode').innerText + num);
 
-                if(nowMode > 3 && nowMode < 9){
-                    document.getElementById('status_mode').innerText = nowMode;
-                    mode = nowMode;
-                } 
-            }
+        if (nowMode > 3 && nowMode < 9) {
+          document.getElementById('status_mode').innerText = nowMode;
+          mode = nowMode;
+        }
+      }
 
-            function randnum(num){
-                return Math.floor(Math.random() * num);
-            }
-        </script>
-    </head>
-    <body>
-        <div class="main">
-            <div class="statusBar">
-                <div class="statusBar_1f">
-                    <div class="titleName" id="test">2048</div>
-                    <div class="score">점수<br><br><span class="scoreNum" id="score">&nbsp;</span></div>
-                    <div class="score">최고 점수<br><br><span class="scoreNum" id="bestScore">&nbsp;</span></div>
-                </div>
-                <div class="statusBar_2f">
-                    <div><input class="_button" type="button" value="START" onclick="button_start()"></div>
-                    <div><input class="_button" type="button" value="UNDO" onclick="button_undo()"></div>
-                    <div class="modeSelector" id="select_mode">
-                        <div class="button_div"><input class="_button" type="button" value="▶" onclick="mode_change('+1');"></div>
-                        <div class="button_div"><span class="modLevel" id="status_mode">4</span></div>
-                        <div class="button_div"><input class="_button" type="button" value="◀" onclick="mode_change('-1');"></div>
-                    </div>
-                </div>  
-            </div>         
-            <div class="gameboard_4" id="gameboard1"></div>            
+      function randnum(num) {
+        return Math.floor(Math.random() * num);
+      }
+    </script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="statusBar">
+        <div class="statusBar_1f">
+          <div class="titleName" id="test">2048</div>
+          <div class="score">점수<br /><br /><span class="scoreNum" id="score">&nbsp;</span></div>
+          <div class="score">최고 점수<br /><br /><span class="scoreNum" id="bestScore">&nbsp;</span></div>
         </div>
-    </body>
+        <div class="statusBar_2f">
+          <div><input class="_button" type="button" value="START" onclick="button_start()" /></div>
+          <div><input class="_button" type="button" value="UNDO" onclick="button_undo()" /></div>
+          <div class="modeSelector" id="select_mode">
+            <div class="button_div"><input class="_button" type="button" value="▶" onclick="mode_change('+1');" /></div>
+            <div class="button_div"><span class="modLevel" id="status_mode">4</span></div>
+            <div class="button_div"><input class="_button" type="button" value="◀" onclick="mode_change('-1');" /></div>
+          </div>
+        </div>
+      </div>
+      <div class="gameboard_4" id="gameboard1"></div>
+    </div>
+  </body>
 </html>
