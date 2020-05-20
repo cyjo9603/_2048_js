@@ -94,31 +94,8 @@ function copyData() {
   }
 }
 
-function checkData() {
-  let check = 0;
-  for (let i = 0; i < gameData.mode; i++) {
-    for (let j = 0; j < gameData.mode; j++) {
-      if (gameData.table.before[i][j] === gameData.table.current[i][j]) check += 1;
-    }
-  }
-  return check;
-}
-
-function checkNull() {
-  let cnt = 0;
-  for (let i = 0; i < gameData.mode; i++) {
-    for (let j = 0; j < gameData.mode; j++) {
-      if (gameData.table.current[i][j] !== null) cnt++;
-    }
-  }
-
-  cnt = cnt < gameData.mode * gameData.mode ? 1 : 2;
-
-  return cnt;
-}
-
 function checkFail() {
-  if (checkData() === gameData.mode * gameData.mode && checkNull() === 2) {
+  if (util.checkData() === gameData.mode * gameData.mode && util.checkNull() === 2) {
     let cnt = 0;
     for (let i = 0; i < gameData.mode - 1; i++) {
       for (let j = 0; j < gameData.mode - 1; j++) {
@@ -173,16 +150,12 @@ function changeMode(num) {
   }
 }
 
-function getRandomNumber(num) {
-  return Math.floor(Math.random() * num);
-}
-
 function createNum() {
-  if (checkNull() === 1) {
+  if (util.checkNull() === 1) {
     while (true) {
-      const num = getRandomNumber(gameData.mode * gameData.mode);
+      const num = util.getRandomNumber(gameData.mode * gameData.mode);
       if (gameData.table.current[getIndex(num)[0]][getIndex(num)[1]] === null) {
-        gameData.table.current[getIndex(num)[0]][getIndex(num)[1]] = getRandomNumber(10) < 2 ? 4 : 2;
+        gameData.table.current[getIndex(num)[0]][getIndex(num)[1]] = util.getRandomNumber(10) < 2 ? 4 : 2;
         break;
       }
     }
@@ -294,7 +267,7 @@ window.onkeyup = (e) => {
         break;
     }
 
-    if (checkData() !== gameData.mode * gameData.mode) createNum();
+    if (util.checkData() !== gameData.mode * gameData.mode) createNum();
     else if (checkFail() === 0) {
       gameData.state = 0;
       if (
