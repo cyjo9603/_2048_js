@@ -61,4 +61,12 @@ const util = {
 
     return { space, bgColor, numColor };
   },
+
+  /** copyData
+   * 배열을 복사해서 반환
+   */
+  copyData: (data) => {
+    const copy = data.map((v) => [...v]);
+    return copy;
+  },
 };
