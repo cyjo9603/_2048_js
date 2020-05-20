@@ -16,12 +16,12 @@
           <div class="score">최고 점수<br /><br /><span class="scoreNum" id="bestScore">&nbsp;</span></div>
         </div>
         <div class="statusBar_2f">
-          <div><input class="_button" type="button" value="START" onclick="onClickStart()" /></div>
-          <div><input class="_button" type="button" value="UNDO" onclick="onClickUndo()" /></div>
+          <div><input class="_button" type="button" value="START" onclick="game.onStart()" /></div>
+          <div><input class="_button" type="button" value="UNDO" onclick="game.onUndo()" /></div>
           <div class="modeSelector" id="select_mode">
-            <div class="button_div"><input class="_button" type="button" value="▶" onclick="changeMode('1');" /></div>
+            <div class="button_div"><input class="_button" type="button" value="▶" onclick="game.changeMode('1');" /></div>
             <div class="button_div"><span class="modLevel" id="status_mode">4</span></div>
-            <div class="button_div"><input class="_button" type="button" value="◀" onclick="changeMode('-1');" /></div>
+            <div class="button_div"><input class="_button" type="button" value="◀" onclick="game.changeMode('-1');" /></div>
           </div>
         </div>
       </div>
