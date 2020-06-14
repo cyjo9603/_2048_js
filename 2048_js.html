@@ -3,9 +3,9 @@
   <head>
     <title>_2048</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
     <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css" />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <div class="main">
@@ -16,19 +16,20 @@
           <div class="score">최고 점수<br /><br /><span class="scoreNum" id="bestScore">&nbsp;</span></div>
         </div>
         <div class="statusBar_2f">
-          <div><input class="_button" type="button" value="START" onclick="controller.game.onStart()" /></div>
-          <div><input class="_button" type="button" value="UNDO" onclick="controller.game.onUndo()" /></div>
+          <div><input class="_button" type="button" value="START" onclick="controller.model.onStart()" /></div>
+          <div><input class="_button" type="button" value="UNDO" onclick="controller.model.onUndo()" /></div>
           <div class="modeSelector" id="select_mode">
-            <div class="button_div"><input class="_button" type="button" value="▶" onclick="controller.game.changeMode('1');" /></div>
+            <div class="button_div"><input class="_button" type="button" value="▶" onclick="controller.model.changeMode('1');" /></div>
             <div class="button_div"><span class="modLevel" id="status_mode">4</span></div>
-            <div class="button_div"><input class="_button" type="button" value="◀" onclick="controller.game.changeMode('-1');" /></div>
+            <div class="button_div"><input class="_button" type="button" value="◀" onclick="controller.model.changeMode('-1');" /></div>
           </div>
         </div>
       </div>
       <div class="gameboard_4" id="gameboard1"></div>
     </div>
     <script src="js/util.js"></script>
+    <script src="js/gameModel.js"></script>
+    <script src="js/gameController.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/onKey.js"></script>
   </body>
 </html>

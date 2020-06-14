@@ -1,7 +1,8 @@
 body, section, div, span, input{
     margin: 0px;
     padding: 0px;
-    font-family: "나눔 고딕", "Nanum Gothic", sans-serif;
+    font-family: 'NanumSquareRound',sans-serif;
+    font-weight: 600;
 }
 
 body{background-color: #F8F8EE;}
